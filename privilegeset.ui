@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HPrivilegeSet</class>
+ <widget class="QDialog" name="HPrivilegeSet">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>692</width>
+    <height>407</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_7">
+   <property name="spacing">
+    <number>1</number>
+   </property>
+   <property name="leftMargin">
+    <number>2</number>
+   </property>
+   <property name="topMargin">
+    <number>2</number>
+   </property>
+   <property name="rightMargin">
+    <number>2</number>
+   </property>
+   <property name="bottomMargin">
+    <number>2</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="2,0,6">
+     <property name="spacing">
+      <number>-1</number>
+     </property>
+     <item>
+      <widget class="QTreeWidget" name="treeWidget">
+       <column>
+        <property name="text">
+         <string notr="true">1</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>系统</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="leftMargin">
+           <number>2</number>
+          </property>
+          <property name="topMargin">
+           <number>2</number>
+          </property>
+          <property name="rightMargin">
+           <number>2</number>
+          </property>
+          <property name="bottomMargin">
+           <number>2</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QCheckBox" name="checkBox">
+              <property name="text">
+               <string>系统登录</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_2">
+              <property name="text">
+               <string>系统关闭</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>维护工具</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="leftMargin">
+           <number>2</number>
+          </property>
+          <property name="topMargin">
+           <number>2</number>
+          </property>
+          <property name="rightMargin">
+           <number>2</number>
+          </property>
+          <property name="bottomMargin">
+           <number>2</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <property name="spacing">
+             <number>-1</number>
+            </property>
+            <item>
+             <widget class="QCheckBox" name="checkBox_3">
+              <property name="text">
+               <string>人员维护</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_4">
+              <property name="text">
+               <string>五防组态</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_5">
+              <property name="text">
+               <string>画面编辑</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_6">
+              <property name="text">
+               <string>系统设置</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
+          <string>操作票</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="leftMargin">
+           <number>2</number>
+          </property>
+          <property name="topMargin">
+           <number>2</number>
+          </property>
+          <property name="rightMargin">
+           <number>2</number>
+          </property>
+          <property name="bottomMargin">
+           <number>2</number>
+          </property>
+          <item>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="checkBox_7">
+              <property name="text">
+               <string>操作票浏览</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QCheckBox" name="checkBox_8">
+              <property name="text">
+               <string>操作票编辑</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QCheckBox" name="checkBox_9">
+              <property name="text">
+               <string>操作票删除</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="checkBox_10">
+              <property name="text">
+               <string>操作票执行</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="checkBox_12">
+              <property name="text">
+               <string>操作票监护</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QCheckBox" name="checkBox_14">
+              <property name="text">
+               <string>操作票作废</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="checkBox_11">
+              <property name="text">
+               <string>编辑票转执行票</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="checkBox_13">
+              <property name="text">
+               <string>模板票转执行票</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QCheckBox" name="checkBox_15">
+              <property name="text">
+               <string>打印设置</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="checkBox_16">
+              <property name="text">
+               <string>下令人</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QCheckBox" name="checkBox_18">
+              <property name="text">
+               <string>值班负责人</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QCheckBox" name="checkBox_17">
+              <property name="text">
+               <string>值长</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
+          <string>工作票</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <property name="leftMargin">
+           <number>2</number>
+          </property>
+          <property name="topMargin">
+           <number>2</number>
+          </property>
+          <property name="rightMargin">
+           <number>2</number>
+          </property>
+          <property name="bottomMargin">
+           <number>2</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QCheckBox" name="checkBox_19">
+              <property name="text">
+               <string>工作票管理</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_20">
+              <property name="text">
+               <string>工作票模板管理</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>148</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_5">
+         <property name="title">
+          <string>其他</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <property name="leftMargin">
+           <number>2</number>
+          </property>
+          <property name="topMargin">
+           <number>2</number>
+          </property>
+          <property name="rightMargin">
+           <number>2</number>
+          </property>
+          <property name="bottomMargin">
+           <number>2</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QCheckBox" name="checkBox_21">
+              <property name="text">
+               <string>人工置数   </string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_22">
+              <property name="text">
+               <string>间隔五防投退</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="2,3,2">
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>200</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_23">
+       <property name="text">
+        <string>统一设置同一组内所有成员权限</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>268</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>添加组</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="text">
+        <string>删除组</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="text">
+        <string>添加用户</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="text">
+        <string>删除用户</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_6">
+       <property name="text">
+        <string>重新命名</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_5">
+       <property name="text">
+        <string>修改密码</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_7">
+       <property name="text">
+        <string>保存</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_8">
+       <property name="text">
+        <string>退出</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
