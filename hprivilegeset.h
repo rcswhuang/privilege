@@ -15,6 +15,8 @@ public:
     explicit HPrivilegeSet(QWidget *parent = 0);
     ~HPrivilegeSet();
 
+public slots:
+
 private:
     Ui::HPrivilegeSet *ui;
 };

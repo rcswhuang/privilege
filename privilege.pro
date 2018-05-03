@@ -10,10 +10,13 @@ TEMPLATE = app
 
 
 SOURCES += \ 
-    hprivilegeset.cpp
+    hprivilegeset.cpp \
+    hprivdoc.cpp
 
 HEADERS  += \ 
-    hprivilegeset.h
+    hprivilegeset.h \
+    hprivdoc.h \
+    hprivilegeapi.h
 
 FORMS += \
     privilegeset.ui
