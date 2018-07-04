@@ -11,14 +11,21 @@ TEMPLATE = app
 
 SOURCES += \ 
     hprivilegeset.cpp \
-    hprivdoc.cpp
+    hprivilege.cpp \
+    main.cpp \
+    hadduserdlg.cpp \
+    hmodifypwddlg.cpp
 
 HEADERS  += \ 
     hprivilegeset.h \
-    hprivdoc.h \
-    hprivilegeapi.h
+    hprivilegeapi.h \
+    hprivilege.h \
+    hadduserdlg.h \
+    hmodifypwddlg.h
 
 FORMS += \
-    privilegeset.ui
+    privilegeset.ui \
+    adduserdlg.ui \
+    modifypwddlg.ui
 
 

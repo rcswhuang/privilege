@@ -6,36 +6,30 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>692</width>
-    <height>407</height>
+    <width>706</width>
+    <height>451</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_7">
-   <property name="spacing">
-    <number>1</number>
-   </property>
    <property name="leftMargin">
-    <number>2</number>
+    <number>6</number>
    </property>
    <property name="topMargin">
-    <number>2</number>
+    <number>6</number>
    </property>
    <property name="rightMargin">
-    <number>2</number>
+    <number>6</number>
    </property>
    <property name="bottomMargin">
-    <number>2</number>
+    <number>6</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="2,0,6">
-     <property name="spacing">
-      <number>-1</number>
-     </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="2,0,5">
      <item>
-      <widget class="QTreeWidget" name="treeWidget">
+      <widget class="QTreeWidget" name="manTreeWidget">
        <column>
         <property name="text">
          <string notr="true">人员设置</string>
@@ -50,8 +44,8 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>20</width>
-         <height>40</height>
+         <width>17</width>
+         <height>358</height>
         </size>
        </property>
       </spacer>
@@ -79,16 +73,16 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
-             <widget class="QCheckBox" name="checkBox">
+             <widget class="QCheckBox" name="SystemLoginBox">
               <property name="text">
                <string>系统登录</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="checkBox_2">
+             <widget class="QCheckBox" name="SystemExitBox">
               <property name="text">
-               <string>系统关闭</string>
+               <string>系统退出</string>
               </property>
              </widget>
             </item>
@@ -121,28 +115,28 @@
              <number>-1</number>
             </property>
             <item>
-             <widget class="QCheckBox" name="checkBox_3">
+             <widget class="QCheckBox" name="PeopleManagerBox">
               <property name="text">
                <string>人员维护</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="checkBox_4">
+             <widget class="QCheckBox" name="ConfigureToolBox">
               <property name="text">
                <string>五防组态</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="checkBox_5">
+             <widget class="QCheckBox" name="GraphEditorBox">
               <property name="text">
                <string>画面编辑</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="checkBox_6">
+             <widget class="QCheckBox" name="SystemSetBox">
               <property name="text">
                <string>系统设置</string>
               </property>
@@ -174,84 +168,84 @@
           <item>
            <layout class="QGridLayout" name="gridLayout">
             <item row="0" column="0">
-             <widget class="QCheckBox" name="checkBox_7">
+             <widget class="QCheckBox" name="OperTicketBrowserBox">
               <property name="text">
                <string>操作票浏览</string>
               </property>
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QCheckBox" name="checkBox_8">
+             <widget class="QCheckBox" name="OperTicketEditorBox">
               <property name="text">
                <string>操作票编辑</string>
               </property>
              </widget>
             </item>
             <item row="0" column="2">
-             <widget class="QCheckBox" name="checkBox_9">
+             <widget class="QCheckBox" name="OperTicketDeleteBox">
               <property name="text">
                <string>操作票删除</string>
               </property>
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QCheckBox" name="checkBox_10">
+             <widget class="QCheckBox" name="OperTicketRunBox">
               <property name="text">
                <string>操作票执行</string>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QCheckBox" name="checkBox_12">
+             <widget class="QCheckBox" name="OperTicketGuardBox">
               <property name="text">
                <string>操作票监护</string>
               </property>
              </widget>
             </item>
             <item row="1" column="2">
-             <widget class="QCheckBox" name="checkBox_14">
+             <widget class="QCheckBox" name="OperTicketCancelBox">
               <property name="text">
                <string>操作票作废</string>
               </property>
              </widget>
             </item>
             <item row="2" column="0">
-             <widget class="QCheckBox" name="checkBox_11">
+             <widget class="QCheckBox" name="TempTicketToRunBox">
               <property name="text">
                <string>编辑票转执行票</string>
               </property>
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QCheckBox" name="checkBox_13">
+             <widget class="QCheckBox" name="ModelTicketToRunBox">
               <property name="text">
                <string>模板票转执行票</string>
               </property>
              </widget>
             </item>
             <item row="2" column="2">
-             <widget class="QCheckBox" name="checkBox_15">
+             <widget class="QCheckBox" name="PrintSetBox">
               <property name="text">
                <string>打印设置</string>
               </property>
              </widget>
             </item>
             <item row="3" column="0">
-             <widget class="QCheckBox" name="checkBox_16">
+             <widget class="QCheckBox" name="GiveOrderBox">
               <property name="text">
                <string>下令人</string>
               </property>
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QCheckBox" name="checkBox_18">
+             <widget class="QCheckBox" name="DutyManagerBox">
               <property name="text">
                <string>值班负责人</string>
               </property>
              </widget>
             </item>
             <item row="3" column="2">
-             <widget class="QCheckBox" name="checkBox_17">
+             <widget class="QCheckBox" name="DutyLeaderBox">
               <property name="text">
                <string>值长</string>
               </property>
@@ -283,14 +277,14 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_3">
             <item>
-             <widget class="QCheckBox" name="checkBox_19">
+             <widget class="QCheckBox" name="WorkTicketManagerBox">
               <property name="text">
                <string>工作票管理</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="checkBox_20">
+             <widget class="QCheckBox" name="WorkTicketModelManagerBox">
               <property name="text">
                <string>工作票模板管理</string>
               </property>
@@ -335,14 +329,14 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
-             <widget class="QCheckBox" name="checkBox_21">
+             <widget class="QCheckBox" name="ManualSetBox">
               <property name="text">
                <string>人工置数   </string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="checkBox_22">
+             <widget class="QCheckBox" name="GroupOnOffBox">
               <property name="text">
                <string>间隔五防投退</string>
               </property>
@@ -366,118 +360,65 @@
          </layout>
         </widget>
        </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="3,0,2">
+         <item>
+          <widget class="QCheckBox" name="UnitPrivilegeBox">
+           <property name="text">
+            <string>统一设置同一组内所有成员权限</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>268</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
       </layout>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="2,3,2">
-     <item>
-      <spacer name="horizontalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>200</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="checkBox_23">
-       <property name="text">
-        <string>统一设置同一组内所有成员权限</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_4">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>268</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="text">
-        <string>添加组</string>
+      <spacer name="horizontalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
-       <property name="autoDefault">
-        <bool>false</bool>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
        </property>
-      </widget>
+      </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="text">
-        <string>删除组</string>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_4">
-       <property name="text">
-        <string>添加用户</string>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_3">
-       <property name="text">
-        <string>删除用户</string>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_6">
-       <property name="text">
-        <string>重新命名</string>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_5">
-       <property name="text">
-        <string>修改密码</string>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_7">
+      <widget class="QPushButton" name="saveBtn">
        <property name="text">
         <string>保存</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_8">
+      <widget class="QPushButton" name="quitBtn">
        <property name="text">
         <string>退出</string>
        </property>
