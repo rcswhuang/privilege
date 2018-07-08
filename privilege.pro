@@ -7,25 +7,30 @@ QT += widgets
 
 TARGET = privilege
 TEMPLATE = app
-
+DEFINES += PRIV_DLL
 
 SOURCES += \ 
     hprivilegeset.cpp \
     hprivilege.cpp \
     main.cpp \
     hadduserdlg.cpp \
-    hmodifypwddlg.cpp
+    hmodifypwddlg.cpp \
+    hprivilegehandle.cpp \
+    hcheckprividlg.cpp
 
 HEADERS  += \ 
     hprivilegeset.h \
     hprivilegeapi.h \
     hprivilege.h \
     hadduserdlg.h \
-    hmodifypwddlg.h
+    hmodifypwddlg.h \
+    hprivexport.h \
+    hcheckprividlg.h
 
 FORMS += \
     privilegeset.ui \
     adduserdlg.ui \
-    modifypwddlg.ui
+    modifypwddlg.ui \
+    checkprividlg.ui
 
 

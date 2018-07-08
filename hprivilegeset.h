@@ -54,6 +54,10 @@ public slots:
     void on_GroupOnOffBox();
     void on_WorkTicketManagerBox();
     void on_WorkTicketModelManagerBox();
+    void on_UnitPrivilegeBox();
+
+    void on_saveBtn();
+    void on_quitBtn();
 private:
     Ui::HPrivilegeSet *ui;
     QAction* addGroupAct;
@@ -63,7 +67,6 @@ private:
     QAction* delUserAct;
     QAction* reNameAct;
     QAction* modifyPwdAct;
-    HPrivilege* m_pPrivilege;
     Group* m_Group;
     User* m_User;
 };

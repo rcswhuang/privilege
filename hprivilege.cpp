@@ -1,13 +1,122 @@
 #include "hprivilege.h"
+#include <QFile>
+#include <QDataStream>
+#include "hcheckprividlg.h"
 
 HPrivilege::HPrivilege()
 {
-
+    loadData();
 }
 
 HPrivilege::~HPrivilege()
 {
+    while(!m_pUserList.isEmpty())
+        delete (User*)m_pUserList.takeFirst();
+    while (!m_pGroupList.isEmpty()) {
+        delete (Group*)m_pGroupList.takeFirst();
+    }
+    m_pUserList.clear();
+    m_pGroupList.clear();
+}
 
+bool HPrivilege::loadData()
+{
+    QString strDataPath; //data目录所在位置
+    QString privifile = strDataPath + "/" + "privilege.dat";
+    QFile file(privifile);
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        return false;
+    }
+    QDataStream stream(&file);
+    quint64 magic;
+    stream>>magic;
+    if(magic != 0xA0B00C0D)
+        return false;
+    quint16 wGroupCount;
+    stream>>wGroupCount;
+    for(int i = 0; i < wGroupCount;i++)
+    {
+        Group* group = new Group;
+        if(!group)
+            return false;
+        quint16 n16;
+        stream>>n16;
+        group->wGroupID = n16;
+        QString s;
+        stream>>s;
+        group->strGroupName = s;
+        quint64 n64;
+        stream>>n64;
+        group->lGroupPrivilege = n64;
+        bool b;
+        stream>>b;
+        group->bUnitePrivilege = b;
+        m_pGroupList.append(group);
+    }
+    quint16 wUserCount;
+    stream>>wUserCount;
+    for(int i = 0; i < wUserCount;i++)
+    {
+        User* user = new User;
+        if(!user)
+            return false;
+        quint16 n16;
+        stream>>n16;
+        user->wUserID = n16;
+        QString s;
+        stream>>s;
+        user->strUserName = s;
+        quint64 n64;
+        stream>>n64;
+        user->lGroupPrivilege = n64;
+        stream>>s;
+        user->strUserPwd = s;
+        stream>>n16;
+        user->wGroupID = n16;
+        m_pUserList.append(user);
+    }
+
+    return true;
+}
+
+bool HPrivilege::saveData()
+{
+    QString strDataPath; //data目录所在位置
+    QString privifile = strDataPath + "/" + "privilege.dat";
+    QFile file(privifile);
+    if(!file.open(QIODevice::WriteOnly))
+    {
+        return false;
+    }
+    QDataStream stream(&file);
+    quint64 magic = 0xA0B00C0D;
+    stream<<(quint64)magic;
+    quint16 wGroupCount = m_pGroupList.count();
+    stream<<(quint16)wGroupCount;
+    for(int i = 0;i < m_pGroupList.count();i++)
+    {
+        Group* group = (Group*)m_pGroupList[i];
+        if(!group) return false;
+        stream<<(quint16)group->wGroupID;
+        stream<<(QString)group->strGroupName;
+        stream<<(quint64)group->lGroupPrivilege;
+        stream<<(bool)group->bUnitePrivilege;
+    }
+    quint16 wUserCount = m_pUserList.count();
+    stream<<(quint16)wUserCount;
+    for(int i = 0;i < m_pUserList.count();i++)
+    {
+        User* user = (User*)m_pUserList[i];
+        if(!user)
+            return false;
+        stream<<(quint16)user->wUserID;
+        stream<<(QString)user->strUserName;
+        stream<<(quint64)user->lGroupPrivilege;
+        stream<<(QString)user->strUserPwd;
+        stream<<(quint16)user->wGroupID;
+    }
+    return true;
 }
 
 Group* HPrivilege::addGroup(const QString& strGroupName)
@@ -137,4 +246,17 @@ bool HPrivilege::delUser(quint16 userID)
     delete user;
     user = NULL;
     return true;
+}
+
+bool HPrivilege::checkPrivilege(quint64 lPrivilege,QString& strUserName,QString& strTitle)
+{
+    HCheckPriviDlg dlg;
+    dlg.m_strTitle = strTitle;
+    dlg.m_lPrivilege = lPrivilege;
+    if(QDialog::Accepted == dlg.exec())
+    {
+        strUserName = dlg.m_strUserName;
+        return true;
+    }
+    return false;
 }

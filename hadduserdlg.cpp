@@ -2,9 +2,9 @@
 #include "ui_adduserdlg.h"
 #include "hprivilege.h"
 #include <QMessageBox>
-
-HAddUserDlg::HAddUserDlg(HPrivilege* privi,QString groupName,quint16 groupID,QWidget *parent) :
-    m_privi(privi),strGroupName(groupName),wGroupID(groupID),QDialog(parent),
+extern HPrivilege m_privi;
+HAddUserDlg::HAddUserDlg(QString groupName,quint16 groupID,QWidget *parent) :
+    strGroupName(groupName),wGroupID(groupID),QDialog(parent),
     ui(new Ui::addUserDlg)
 {
     ui->setupUi(this);
@@ -22,7 +22,7 @@ void HAddUserDlg::on_addBtn()
 {
     strName = ui->userEdit->text();
     //判断是否存在重名
-    if(NULL != m_privi->findUser(wGroupID,strName))
+    if(NULL != m_privi.findUser(wGroupID,strName))
     {
         QMessageBox::warning(NULL,"警告","存在重名,请修改用户名",QMessageBox::Ok);
         return;

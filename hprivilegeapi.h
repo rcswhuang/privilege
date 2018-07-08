@@ -4,6 +4,8 @@
  * api接口和相关结构定义
 */
 #include<QtGlobal>
+#include<QString>
+#include "hprivexport.h"
 #ifdef __cplusplus
 extern "C"
 {
@@ -30,6 +32,14 @@ typedef struct _tagUser
     QString strUserPwd;
     quint64 lGroupPrivilege; //组权限
 }User;
+
+//校验
+bool PRIV_EXPORT checkPrivilege(quint64 lPrivilege,QString& strUserName,QString& strTitle);
+
+//权限设置
+bool PRIV_EXPORT setPrivilege();
+
+
 #ifdef __cplusplus
 }
 #endif

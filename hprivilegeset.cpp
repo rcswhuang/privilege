@@ -7,6 +7,8 @@
 #include "hprivilege.h"
 #include "hadduserdlg.h"
 #include "hmodifypwddlg.h"
+extern HPrivilege m_privi;
+
 #define TREE_PRIVSET_ROOT 0
 #define TREE_PRIVSET_GROUP 1
 #define TREE_PRIVSET_USER 2
@@ -17,7 +19,6 @@ HPrivilegeSet::HPrivilegeSet(QWidget *parent) :
     ui(new Ui::HPrivilegeSet)
 {
     ui->setupUi(this);
-    m_pPrivilege = new HPrivilege;
     initPrivilegeSet();
 }
 
@@ -65,14 +66,17 @@ void HPrivilegeSet::initPrivilegeSet()
     connect(ui->GroupOnOffBox,SIGNAL(clicked(bool)),this,SLOT(on_GroupOnOffBox()));
     connect(ui->WorkTicketManagerBox,SIGNAL(clicked(bool)),this,SLOT(on_WorkTicketManagerBox()));
     connect(ui->WorkTicketModelManagerBox,SIGNAL(clicked(bool)),this,SLOT(on_WorkTicketModelManagerBox()));
+    connect(ui->UnitPrivilegeBox,SIGNAL(clicked(bool)),this,SLOT(on_UnitPrivilegeBox()));
 
+    connect(ui->saveBtn,SIGNAL(clicked(bool)),this,SLOT(on_saveBtn()));
+    connect(ui->quitBtn,SIGNAL(clicked(bool)),this,SLOT(on_quitBtn()));
 
     QTreeWidgetItem* item = new QTreeWidgetItem(ui->manTreeWidget,TREE_PRIVSET_ROOT);
     item->setText(0,"权限设置");
     //如果初始就定义系统管理组和1个系统管理员，初始密码为空
-    if(m_pPrivilege->m_pGroupList.isEmpty())
+    if(m_privi.m_pGroupList.isEmpty())
     {
-        Group* group = m_pPrivilege->addGroup("系统管理组");
+        Group* group = m_privi.addGroup("系统管理组");
         group->wGroupID = ADMINGROUPID;//系统管理组特殊组号
         if(!group) return;
         QTreeWidgetItem* item1 = new QTreeWidgetItem(item,TREE_PRIVSET_GROUP);
@@ -80,7 +84,7 @@ void HPrivilegeSet::initPrivilegeSet()
         item1->setData(0,Qt::UserRole,group->wGroupID);
         item->addChild(item1);
 
-        User* user = m_pPrivilege->addUser(group->wGroupID,"系统管理员","");
+        User* user = m_privi.addUser(group->wGroupID,"系统管理员","");
         user->wUserID = ADMINUSERID;//特殊用户号
         if(!user) return;
         QTreeWidgetItem *userItem = new QTreeWidgetItem(item1,TREE_PRIVSET_USER);
@@ -90,7 +94,28 @@ void HPrivilegeSet::initPrivilegeSet()
     }
     else
     {
-
+        for(int i = 0; i < m_privi.m_pGroupList.count();i++)
+        {
+            Group* group = (Group*)m_privi.m_pGroupList[i];
+            if(!group) return;
+            QTreeWidgetItem* item1 = new QTreeWidgetItem(item,TREE_PRIVSET_GROUP);
+            item1->setText(0,group->strGroupName);
+            item1->setData(0,Qt::UserRole,group->wGroupID);
+            item->addChild(item1);
+            for(int j = 0; j < m_privi.m_pUserList.count();j++)
+            {
+                User* user = (User*)m_privi.m_pUserList[j];
+                if(!user) return;
+                if(user->wGroupID == group->wGroupID)
+                {
+                    QTreeWidgetItem *userItem = new QTreeWidgetItem(item1,TREE_PRIVSET_USER);
+                    userItem->setData(0,Qt::UserRole,user->wUserID);//userID是唯一的
+                    userItem->setText(0,user->strUserName);
+                    item1->addChild(userItem);
+                }
+            }
+        }
+        ui->manTreeWidget->expandItem(item);
     }
 }
 
@@ -132,7 +157,7 @@ void HPrivilegeSet::treeRightClick()
         if(TREE_PRIVSET_GROUP == item->type())
         {
             quint16 wGroupID = item->data(0,Qt::UserRole).toUInt();
-            Group* group = m_pPrivilege->findGroup(wGroupID);
+            Group* group = m_privi.findGroup(wGroupID);
             if(!group)
                 return;
             ui->UnitPrivilegeBox->setVisible(true);
@@ -143,19 +168,22 @@ void HPrivilegeSet::treeRightClick()
         else if(TREE_PRIVSET_USER == item->type())
         {
             quint16 wUserID = item->data(0,Qt::UserRole).toUInt();
-            User* user = m_pPrivilege->findUser(wUserID);
+            User* user = m_privi.findUser(wUserID);
             if(NULL == user)
                 return;
             QTreeWidgetItem* parentItem = item->parent();
             quint16 wGroupID = parentItem->data(0,Qt::UserRole).toUInt();
-            Group* group = m_pPrivilege->findGroup(wGroupID);
+            Group* group = m_privi.findGroup(wGroupID);
             if(NULL == group)
                 return;
+            ui->UnitPrivilegeBox->setVisible(false);
             if(group->bUnitePrivilege)
             {
-                ui->UnitPrivilegeBox->setVisible(false);
-                ui->UnitPrivilegeBox->setChecked(group->bUnitePrivilege);
                 updatePrivilege(group->lGroupPrivilege,false);
+            }
+            else
+            {
+                updatePrivilege(user->lGroupPrivilege);
             }
             m_User = user;
         }
@@ -217,14 +245,14 @@ void HPrivilegeSet::on_addGroup()
     QString text = QInputDialog::getText(this, tr("组名设置"),tr("组名称:"), QLineEdit::Normal,"", &ok);
     if (!ok || text.isEmpty())
       return;
-    Group* group = m_pPrivilege->findGroup(text);
+    Group* group = m_privi.findGroup(text);
     if(NULL != group)
     {
         QMessageBox::warning(NULL,"警告","组已经存在!",QMessageBox::Ok);
         return;
         //组名已存在
     }
-    group = m_pPrivilege->addGroup(text);
+    group = m_privi.addGroup(text);
     if(NULL == group)
     {
         //增加组名失败
@@ -257,12 +285,12 @@ void HPrivilegeSet::on_delGroup()
         QMessageBox::warning(NULL,"警告","系统组无法删除！",QMessageBox::Ok);
         return;
     }
-    Group* group = m_pPrivilege->findGroup(wGroupID);
+    Group* group = m_privi.findGroup(wGroupID);
     if(NULL == group)
     {
         return;
     }
-    m_pPrivilege->delGroup(group->wGroupID);
+    m_privi.delGroup(group->wGroupID);
 
     QTreeWidgetItem* parentItem = item->parent();
     if(NULL == parentItem)
@@ -289,7 +317,7 @@ void HPrivilegeSet::on_reGroupName()
         return;
     }
     quint16 wGroupID = item->data(0,Qt::UserRole).toUInt();
-    Group* group = m_pPrivilege->findGroup(wGroupID);
+    Group* group = m_privi.findGroup(wGroupID);
     if(NULL == group)
     {
         return;
@@ -299,10 +327,9 @@ void HPrivilegeSet::on_reGroupName()
     QString text = QInputDialog::getText(this, tr("组名设置"),tr("组名称:"), QLineEdit::Normal,strGroup, &ok);
     if (!ok || text.isEmpty())
       return;
-    Group* group1 = m_pPrivilege->findGroup(text);
+    Group* group1 = m_privi.findGroup(text);
     if(NULL != group1)
     {
-        //组名重复
         QMessageBox::warning(NULL,"警告","组名重复！",QMessageBox::Ok);
         return;
     }
@@ -319,18 +346,16 @@ void HPrivilegeSet::on_addUser()
     }
     quint16 wGroupID = item->data(0,Qt::UserRole).toUInt();
     QString strGroupName = item->text(0);
-    HAddUserDlg dlg(m_pPrivilege,strGroupName,wGroupID,this);
+    HAddUserDlg dlg(strGroupName,wGroupID,this);
     if(QDialog::Accepted ==  dlg.exec())
     {
         QString strUser = dlg.strName;
         QString strPwd = dlg.strPwd;
-        User* user = m_pPrivilege->addUser(wGroupID,strUser,strPwd);
+        User* user = m_privi.addUser(wGroupID,strUser,strPwd);
         if(NULL == user)
         {
-            //增加组名失败
             return;
         }
-        //QTreeWidgetItem* item = ui->manTreeWidget->currentItem();
         QTreeWidgetItem* childItem = new QTreeWidgetItem(item,TREE_PRIVSET_USER);
         if(NULL == childItem || NULL == item)
         {
@@ -340,7 +365,6 @@ void HPrivilegeSet::on_addUser()
         childItem->setData(0,Qt::UserRole,user->wUserID);
         item->addChild(childItem);
     }
-
 }
 
 void HPrivilegeSet::on_delUser()
@@ -360,12 +384,12 @@ void HPrivilegeSet::on_delUser()
         QMessageBox::warning(NULL,"警告","系统管理员不能删除!",QMessageBox::Ok);
         return;
     }
-    User* user = m_pPrivilege->findUser(wUserID);
+    User* user = m_privi.findUser(wUserID);
     if(NULL == user)
     {
 
     }
-    m_pPrivilege->delUser(user->wUserID);
+    m_privi.delUser(user->wUserID);
 
     QTreeWidgetItem* parentItem = item->parent();
     if(NULL == parentItem)
@@ -389,7 +413,7 @@ void HPrivilegeSet::on_reNameUser()
         return;
     }
     quint16 wUserID = item->data(0,Qt::UserRole).toUInt();
-    User* user = m_pPrivilege->findUser(wUserID);
+    User* user = m_privi.findUser(wUserID);
     if(NULL == user)
     {
         return;
@@ -411,7 +435,7 @@ void HPrivilegeSet::on_reNameUser()
         return;
     }
     quint16 wGroupID = parentItem->data(0,Qt::UserRole).toUInt();
-    User* user1 = m_pPrivilege->findUser(wGroupID,text);
+    User* user1 = m_privi.findUser(wGroupID,text);
     if(NULL != user1)
     {
         //组名重复
@@ -429,7 +453,7 @@ void HPrivilegeSet::on_modifyPwd()
         return;
     }
     quint16 wUserID = item->data(0,Qt::UserRole).toUInt();
-    User* user = m_pPrivilege->findUser(wUserID);
+    User* user = m_privi.findUser(wUserID);
     if(NULL == user)
     {
         return;
@@ -566,6 +590,7 @@ void HPrivilegeSet::setGroupPrivilege(quint64 lPrivilege,Group* group)
     {
         if(lPrivilege == HPrivilege::PeopleManagerPrivi && (group->wGroupID = ADMINGROUPID))
         {
+            ui->PeopleManagerBox->setChecked(true);
             QMessageBox::warning(NULL,"警告","系统管理员必须有人员维护权限!",QMessageBox::Ok);
             return;
         }
@@ -578,9 +603,9 @@ void HPrivilegeSet::setGroupPrivilege(quint64 lPrivilege,Group* group)
 
     if(group->bUnitePrivilege)
     {
-        for(int i = 0; i < m_pPrivilege->m_pUserList.count();i++)
+        for(int i = 0; i < m_privi.m_pUserList.count();i++)
         {
-            User* user = m_pPrivilege->m_pUserList[i];
+            User* user = m_privi.m_pUserList[i];
             if(user->wGroupID == group->wGroupID)
                 user->lGroupPrivilege = group->lGroupPrivilege;
         }
@@ -595,6 +620,7 @@ void HPrivilegeSet::setUserPrivilege(quint64 lPrivilege,User* user)
         if(lPrivilege == HPrivilege::PeopleManagerPrivi && (user->wGroupID = ADMINUSERID))
         {
             QMessageBox::warning(NULL,"警告","系统管理员必须有人员维护权限!",QMessageBox::Ok);
+            ui->PeopleManagerBox->setChecked(true);
             return;
         }
         user->lGroupPrivilege &=(~lPrivilege);
@@ -603,4 +629,29 @@ void HPrivilegeSet::setUserPrivilege(quint64 lPrivilege,User* user)
     {
         user->lGroupPrivilege |= lPrivilege;
     }
+}
+
+void HPrivilegeSet::on_UnitPrivilegeBox()
+{
+    if(!m_Group)
+        return;
+    bool bCheck = ui->UnitPrivilegeBox->isChecked();
+    m_Group->bUnitePrivilege = bCheck;
+    for(int i = 0; i < m_privi.m_pUserList.count();i++)
+    {
+        User* user = m_privi.m_pUserList[i];
+        if(user->wGroupID == m_Group->wGroupID)
+            user->lGroupPrivilege = m_Group->lGroupPrivilege;
+    }
+    //updatePrivilege(bCheck);
+}
+
+void HPrivilegeSet::on_saveBtn()
+{
+    QDialog::accept();
+}
+
+void HPrivilegeSet::on_quitBtn()
+{
+    QDialog::reject();
 }

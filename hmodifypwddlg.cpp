@@ -3,8 +3,7 @@
 
 #include <QMessageBox>
 HModifyPwdDlg::HModifyPwdDlg(User* user,QWidget *parent) :
-    QDialog(parent),m_user(user),
-    ui(new Ui::modifyPwdDlg)
+    QDialog(parent),ui(new Ui::modifyPwdDlg),m_user(user)
 {
     ui->setupUi(this);
     connect(ui->yesBtn,SIGNAL(clicked(bool)),this,SLOT(on_yesBtn()));

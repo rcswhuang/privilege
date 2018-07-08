@@ -13,7 +13,7 @@ class HPrivilege
 public:
     enum privi
     {
-        PeopleManagerPrivi          = 0x00000001L, //人员管理
+        PeopleManagerPrivi          = 0x00000001L, //人员权限管理
         ConfigureToolPrivi          = 0x00000002L, //五防组态
         GraphEditorPrivi            = 0x00000004L, //画面编辑
         SystemSetPrivi              = 0x00000008L, //系统设置
@@ -53,8 +53,8 @@ public:
     HPrivilege();
     ~HPrivilege();
 public:
-    void loadData();
-    void saveData();
+    bool loadData();
+    bool saveData();
 
 public:
     //组相关
@@ -68,6 +68,10 @@ public:
 
     bool delGroup(quint16 groupID);
     bool delUser(quint16 userID);
+
+public:
+    bool checkPrivilege(quint64 lPrivilege,QString& strUserName,QString& strTitle);
+
 public:
     QList<Group*> m_pGroupList;
     QList<User*> m_pUserList;
