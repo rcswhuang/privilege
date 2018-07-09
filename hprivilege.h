@@ -1,4 +1,4 @@
-#ifndef HPRIVILEGE_H
+﻿#ifndef HPRIVILEGE_H
 #define HPRIVILEGE_H
 
 #include <QObject>
@@ -71,6 +71,7 @@ public:
 
 public:
     bool checkPrivilege(quint64 lPrivilege,QString& strUserName,QString& strTitle);
+    bool PRIV_EXPORT setPrivilege();
 
 public:
     QList<Group*> m_pGroupList;

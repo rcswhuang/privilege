@@ -30,6 +30,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="2,0,5">
      <item>
       <widget class="QTreeWidget" name="manTreeWidget">
+       <attribute name="headerVisible">
+        <bool>false</bool>
+       </attribute>
        <column>
         <property name="text">
          <string notr="true">人员设置</string>
@@ -112,7 +115,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <property name="spacing">
-             <number>-1</number>
+             <number>6</number>
             </property>
             <item>
              <widget class="QCheckBox" name="PeopleManagerBox">

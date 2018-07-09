@@ -1,8 +1,12 @@
+﻿#if defined(_MSC_VER) &&(_MSC_VER >= 1600)
+#pragma execution_character_set("utf-8")
+#endif
 #include "hcheckprividlg.h"
 #include "ui_checkprividlg.h"
 #include "hprivilege.h"
 #include <QMessageBox>
 extern HPrivilege m_privi;
+extern quint64 g_lPrivilege;
 HCheckPriviDlg::HCheckPriviDlg(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::HCheckPriviDlg)
@@ -44,12 +48,18 @@ void HCheckPriviDlg::on_okBtn()
     if(strPwd == user->strUserPwd)
     {
         m_strUserName = user->strUserName;
+        g_lPrivilege = user->lGroupPrivilege;
         QDialog::accept();
     }
     else
     {
         QMessageBox::warning(NULL,"警告","密码不正确!",QMessageBox::Ok);
     }
+}
+
+void HCheckPriviDlg::on_cancelBtn()
+{
+    QDialog::reject();
 }
 
 

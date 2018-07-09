@@ -1,4 +1,4 @@
-#include "hmodifypwddlg.h"
+﻿#include "hmodifypwddlg.h"
 #include "ui_modifypwddlg.h"
 
 #include <QMessageBox>

@@ -1,3 +1,6 @@
+﻿#if defined(_MSC_VER) &&(_MSC_VER >= 1600)
+#pragma execution_character_set("utf-8")
+#endif
 #include "hprivilegeset.h"
 #include "ui_privilegeset.h"
 #include <QMenu>
@@ -20,6 +23,7 @@ HPrivilegeSet::HPrivilegeSet(QWidget *parent) :
 {
     ui->setupUi(this);
     initPrivilegeSet();
+    setWindowTitle("权限设置");
 }
 
 HPrivilegeSet::~HPrivilegeSet()
@@ -648,6 +652,10 @@ void HPrivilegeSet::on_UnitPrivilegeBox()
 
 void HPrivilegeSet::on_saveBtn()
 {
+    if(m_privi.saveData())
+    {
+        QMessageBox::information(NULL,"提示","保存成功!",QMessageBox::Ok);
+    }
     QDialog::accept();
 }
 

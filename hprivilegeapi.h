@@ -1,5 +1,8 @@
-#ifndef HPRIVILEGEAPI_H
+﻿#ifndef HPRIVILEGEAPI_H
 #define HPRIVILEGEAPI_H
+#if defined(_MSC_VER) &&(_MSC_VER >= 1600)
+#pragma execution_character_set("utf-8")
+#endif
 /*
  * api接口和相关结构定义
 */

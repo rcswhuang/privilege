@@ -1,8 +1,8 @@
-#include "hprivilege.h"
+﻿#include "hprivilege.h"
 #include <QFile>
 #include <QDataStream>
 #include "hcheckprividlg.h"
-
+#include "hprivilegeset.h"
 HPrivilege::HPrivilege()
 {
     loadData();
@@ -21,7 +21,7 @@ HPrivilege::~HPrivilege()
 
 bool HPrivilege::loadData()
 {
-    QString strDataPath; //data目录所在位置
+    QString strDataPath = QString("D:"); //data目录所在位置
     QString privifile = strDataPath + "/" + "privilege.dat";
     QFile file(privifile);
     if(!file.open(QIODevice::ReadOnly))
@@ -76,13 +76,12 @@ bool HPrivilege::loadData()
         user->wGroupID = n16;
         m_pUserList.append(user);
     }
-
     return true;
 }
 
 bool HPrivilege::saveData()
 {
-    QString strDataPath; //data目录所在位置
+    QString strDataPath = QString("D:"); //data目录所在位置  sysconfig
     QString privifile = strDataPath + "/" + "privilege.dat";
     QFile file(privifile);
     if(!file.open(QIODevice::WriteOnly))
@@ -259,4 +258,14 @@ bool HPrivilege::checkPrivilege(quint64 lPrivilege,QString& strUserName,QString&
         return true;
     }
     return false;
+}
+
+bool HPrivilege::setPrivilege()
+{
+    QString strUserName;
+    if(!checkPrivilege(HPrivilege::PeopleManagerPrivi,strUserName,QString("权限管理")))
+        return false;
+    HPrivilegeSet dlg;
+    dlg.exec();
+    return true;
 }
