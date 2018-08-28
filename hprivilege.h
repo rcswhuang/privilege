@@ -77,7 +77,6 @@ public:
     QList<Group*> m_pGroupList;
     QList<User*> m_pUserList;
 
-
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(HPrivilege::privis)
 #endif // HPRIVDOC_H
