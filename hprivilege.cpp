@@ -3,9 +3,14 @@
 #include <QDataStream>
 #include "hcheckprividlg.h"
 #include "hprivilegeset.h"
+
 HPrivilege::HPrivilege()
 {
     loadData();
+    initSysConfig();
+    char szPriFile[256];
+    getDataFilePath(DFPATH_DATA,szPriFile);
+    m_strPriFile = QString(szPriFile) + "/" + "privilege.dat";
 }
 
 HPrivilege::~HPrivilege()
@@ -21,9 +26,9 @@ HPrivilege::~HPrivilege()
 
 bool HPrivilege::loadData()
 {
-    QString strDataPath = QString("D:"); //data目录所在位置
-    QString privifile = strDataPath + "/" + "privilege.dat";
-    QFile file(privifile);
+    if(m_strPriFile.isEmpty())
+        return false;
+    QFile file(m_strPriFile);
     if(!file.open(QIODevice::ReadOnly))
     {
         return false;
@@ -81,9 +86,9 @@ bool HPrivilege::loadData()
 
 bool HPrivilege::saveData()
 {
-    QString strDataPath = QString("D:"); //data目录所在位置  sysconfig
-    QString privifile = strDataPath + "/" + "privilege.dat";
-    QFile file(privifile);
+    if(m_strPriFile.isEmpty())
+        return false;
+    QFile file(m_strPriFile);
     if(!file.open(QIODevice::WriteOnly))
     {
         return false;
@@ -263,7 +268,8 @@ bool HPrivilege::checkPrivilege(quint64 lPrivilege,QString& strUserName,QString&
 bool HPrivilege::setPrivilege()
 {
     QString strUserName;
-    if(!checkPrivilege(HPrivilege::PeopleManagerPrivi,strUserName,QString("权限管理")))
+    QString strTitle = QStringLiteral("权限管理");
+    if(!checkPrivilege(HPrivilege::PeopleManagerPrivi,strUserName,strTitle));
         return false;
     HPrivilegeSet dlg;
     dlg.exec();

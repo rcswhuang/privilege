@@ -13,7 +13,9 @@ bool PRIV_EXPORT checkPrivilege(quint64 lPrivilege,QString& strUserName,QString&
     {
         time_t t;
         time(&t);
-        int n = 30;//配置文档里面读取有效时间
+        QVariant var;
+        getSettingValue(SYS_SET_NORMAL,SYS_PASSWORD_VALID_TIME,var);
+        int n = var.toInt();//配置文档里面读取有效时间
         if(n > 0)
         {
             if(t - g_startLogintime < n)

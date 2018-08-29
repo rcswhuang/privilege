@@ -5,6 +5,8 @@
 #include <QList>
 #include <QFlags>
 #include "hprivilegeapi.h"
+#include "publicdata.h"
+#include "hconfigapi.h"
 /*
  * 完成权限文件的读取和存储
 */
@@ -76,6 +78,8 @@ public:
 public:
     QList<Group*> m_pGroupList;
     QList<User*> m_pUserList;
+private:
+    QString m_strPriFile;
 
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(HPrivilege::privis)
