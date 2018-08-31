@@ -47,5 +47,18 @@ FORMS += \
     modifypwddlg.ui \
     checkprividlg.ui
 
+LIBS += -L../lib -lH5ConfigHelp -ldatafile
+unix{
+    UI_DIR = temp/ui
+    MOC_DIR = tem/moc
+    OBJECTS_DIR	= temp/obj
+    LIBS += \
 
+}
 
+win32{
+    UI_DIR = temp/ui
+    MOC_DIR = temp/moc
+    OBJECTS_DIR	= temp/obj
+    LIBS += \
+}
