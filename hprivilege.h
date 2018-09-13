@@ -7,6 +7,13 @@
 #include "hprivilegeapi.h"
 #include "publicdata.h"
 #include "hconfigapi.h"
+
+#define TREE_PRIVSET_ROOT 0
+#define TREE_PRIVSET_GROUP 1
+#define TREE_PRIVSET_USER 2
+#define ADMINGROUPID 9999
+#define ADMINUSERID 8888
+
 /*
  * 完成权限文件的读取和存储
 */

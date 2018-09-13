@@ -6,11 +6,11 @@
 
 HPrivilege::HPrivilege()
 {
-    loadData();
     initSysConfig();
     char szPriFile[256];
     getDataFilePath(DFPATH_DATA,szPriFile);
     m_strPriFile = QString(szPriFile) + "/" + "privilege.dat";
+    loadData();
 }
 
 HPrivilege::~HPrivilege()
@@ -26,7 +26,7 @@ HPrivilege::~HPrivilege()
 
 bool HPrivilege::loadData()
 {
-    if(m_strPriFile.isEmpty())
+    /*if(m_strPriFile.isEmpty())
         return false;
     QFile file(m_strPriFile);
     if(!file.open(QIODevice::ReadOnly))
@@ -80,6 +80,17 @@ bool HPrivilege::loadData()
         stream>>n16;
         user->wGroupID = n16;
         m_pUserList.append(user);
+    }*/
+
+    //初始化管理员组号
+    Group* group = addGroup("系统管理组");
+    if(group)
+    {
+        group->wGroupID = ADMINGROUPID;//系统管理组特殊组号
+
+        User* user = addUser(group->wGroupID,"系统管理员","");
+        if(user)
+            user->wUserID = ADMINUSERID;//特殊用户号
     }
     return true;
 }
@@ -257,6 +268,7 @@ bool HPrivilege::checkPrivilege(quint64 lPrivilege,QString& strUserName,QString&
     HCheckPriviDlg dlg;
     dlg.m_strTitle = strTitle;
     dlg.m_lPrivilege = lPrivilege;
+    dlg.initCheckPrivi();
     if(QDialog::Accepted == dlg.exec())
     {
         strUserName = dlg.m_strUserName;
@@ -269,7 +281,8 @@ bool HPrivilege::setPrivilege()
 {
     QString strUserName;
     QString strTitle = QStringLiteral("权限管理");
-    if(!checkPrivilege(HPrivilege::PeopleManagerPrivi,strUserName,strTitle));
+    //bool bOk = checkPrivilege(HPrivilege::PeopleManagerPrivi,strUserName,strTitle);
+    if(!checkPrivilege(HPrivilege::PeopleManagerPrivi,strUserName,strTitle))
         return false;
     HPrivilegeSet dlg;
     dlg.exec();

@@ -12,11 +12,7 @@
 #include "hmodifypwddlg.h"
 extern HPrivilege m_privi;
 
-#define TREE_PRIVSET_ROOT 0
-#define TREE_PRIVSET_GROUP 1
-#define TREE_PRIVSET_USER 2
-#define ADMINGROUPID 9999
-#define ADMINUSERID 8888
+
 HPrivilegeSet::HPrivilegeSet(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::HPrivilegeSet)
@@ -78,49 +74,29 @@ void HPrivilegeSet::initPrivilegeSet()
     QTreeWidgetItem* item = new QTreeWidgetItem(ui->manTreeWidget,TREE_PRIVSET_ROOT);
     item->setText(0,"权限设置");
     //如果初始就定义系统管理组和1个系统管理员，初始密码为空
-    if(m_privi.m_pGroupList.isEmpty())
+    for(int i = 0; i < m_privi.m_pGroupList.count();i++)
     {
-        Group* group = m_privi.addGroup("系统管理组");
-        group->wGroupID = ADMINGROUPID;//系统管理组特殊组号
+        Group* group = (Group*)m_privi.m_pGroupList[i];
         if(!group) return;
         QTreeWidgetItem* item1 = new QTreeWidgetItem(item,TREE_PRIVSET_GROUP);
         item1->setText(0,group->strGroupName);
         item1->setData(0,Qt::UserRole,group->wGroupID);
         item->addChild(item1);
-
-        User* user = m_privi.addUser(group->wGroupID,"系统管理员","");
-        user->wUserID = ADMINUSERID;//特殊用户号
-        if(!user) return;
-        QTreeWidgetItem *userItem = new QTreeWidgetItem(item1,TREE_PRIVSET_USER);
-        userItem->setData(0,Qt::UserRole,user->wUserID);//userID是唯一的
-        userItem->setText(0,user->strUserName);
-        item1->addChild(userItem);
-    }
-    else
-    {
-        for(int i = 0; i < m_privi.m_pGroupList.count();i++)
+        for(int j = 0; j < m_privi.m_pUserList.count();j++)
         {
-            Group* group = (Group*)m_privi.m_pGroupList[i];
-            if(!group) return;
-            QTreeWidgetItem* item1 = new QTreeWidgetItem(item,TREE_PRIVSET_GROUP);
-            item1->setText(0,group->strGroupName);
-            item1->setData(0,Qt::UserRole,group->wGroupID);
-            item->addChild(item1);
-            for(int j = 0; j < m_privi.m_pUserList.count();j++)
+            User* user = (User*)m_privi.m_pUserList[j];
+            if(!user) return;
+            if(user->wGroupID == group->wGroupID)
             {
-                User* user = (User*)m_privi.m_pUserList[j];
-                if(!user) return;
-                if(user->wGroupID == group->wGroupID)
-                {
-                    QTreeWidgetItem *userItem = new QTreeWidgetItem(item1,TREE_PRIVSET_USER);
-                    userItem->setData(0,Qt::UserRole,user->wUserID);//userID是唯一的
-                    userItem->setText(0,user->strUserName);
-                    item1->addChild(userItem);
-                }
+                QTreeWidgetItem *userItem = new QTreeWidgetItem(item1,TREE_PRIVSET_USER);
+                userItem->setData(0,Qt::UserRole,user->wUserID);//userID是唯一的
+                userItem->setText(0,user->strUserName);
+                item1->addChild(userItem);
             }
         }
-        ui->manTreeWidget->expandItem(item);
     }
+    ui->manTreeWidget->expandItem(item);
+
 }
 
 void HPrivilegeSet::treeRightClick()

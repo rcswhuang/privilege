@@ -12,7 +12,7 @@ HCheckPriviDlg::HCheckPriviDlg(QWidget *parent) :
     ui(new Ui::HCheckPriviDlg)
 {
     ui->setupUi(this);
-    initCheckPrivi();
+    //initCheckPrivi();
 }
 
 HCheckPriviDlg::~HCheckPriviDlg()
@@ -49,12 +49,14 @@ void HCheckPriviDlg::on_okBtn()
     {
         m_strUserName = user->strUserName;
         g_lPrivilege = user->lGroupPrivilege;
-        QDialog::accept();
+        //QDialog::accept();
     }
     else
     {
         QMessageBox::warning(NULL,"警告","密码不正确!",QMessageBox::Ok);
+        return;
     }
+    QDialog::accept();
 }
 
 void HCheckPriviDlg::on_cancelBtn()
