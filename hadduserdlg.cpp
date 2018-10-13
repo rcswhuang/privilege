@@ -11,6 +11,7 @@ HAddUserDlg::HAddUserDlg(QString groupName,quint16 groupID,QWidget *parent) :
     ui(new Ui::addUserDlg)
 {
     ui->setupUi(this);
+    setWindowFlags(windowFlags()&~Qt::WindowContextHelpButtonHint);
     ui->groupLineEdit->setText(strGroupName);
     connect(ui->addBtn,SIGNAL(clicked(bool)),this,SLOT(on_addBtn()));
     connect(ui->cancleBtn,SIGNAL(clicked(bool)),this,SLOT(on_cancleBtn()));

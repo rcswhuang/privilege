@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QList>
-#include <QFlags>
+//#include <QFlags>
 #include "hprivilegeapi.h"
 #include "publicdata.h"
 #include "hconfigapi.h"
@@ -20,7 +20,7 @@
 class HPrivilege
 {
 public:
-    enum privi
+    /*enum privi
     {
         PeopleManagerPrivi          = 0x00000001L, //人员权限管理
         ConfigureToolPrivi          = 0x00000002L, //五防组态
@@ -57,14 +57,14 @@ public:
         WorkTicketManagerPrivi | WorkTicketModelManagerPrivi | SystemLoginPrivi | SystemExitPrivi
 
     };
-    Q_DECLARE_FLAGS(privis,privi)
+    Q_DECLARE_FLAGS(privis,privi)*/
 public:
     HPrivilege();
     ~HPrivilege();
 public:
     bool loadData();
     bool saveData();
-
+    bool makePrivilegeFile();
 public:
     //组相关
     Group* addGroup(const QString& strGroupName);
@@ -89,5 +89,5 @@ private:
     QString m_strPriFile;
 
 };
-Q_DECLARE_OPERATORS_FOR_FLAGS(HPrivilege::privis)
+//Q_DECLARE_OPERATORS_FOR_FLAGS(HPrivilege::privis)
 #endif // HPRIVDOC_H

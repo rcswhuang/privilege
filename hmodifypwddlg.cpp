@@ -6,6 +6,7 @@ HModifyPwdDlg::HModifyPwdDlg(User* user,QWidget *parent) :
     QDialog(parent),ui(new Ui::modifyPwdDlg),m_user(user)
 {
     ui->setupUi(this);
+    setWindowFlags(windowFlags()&~Qt::WindowContextHelpButtonHint);
     connect(ui->yesBtn,SIGNAL(clicked(bool)),this,SLOT(on_yesBtn()));
     connect(ui->noBtn,SIGNAL(clicked(bool)),this,SLOT(on_noBtn()));
     ui->userEdit->setText(m_user->strUserName);

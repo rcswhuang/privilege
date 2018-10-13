@@ -18,6 +18,7 @@ HPrivilegeSet::HPrivilegeSet(QWidget *parent) :
     ui(new Ui::HPrivilegeSet)
 {
     ui->setupUi(this);
+    setWindowFlags(windowFlags()&~Qt::WindowContextHelpButtonHint);
     initPrivilegeSet();
     setWindowTitle("权限设置");
 }
@@ -194,28 +195,28 @@ void HPrivilegeSet::updatePrivilege(quint64 lGroupPrivilege,bool bUnitGroupPrivi
     ui->GroupOnOffBox->setEnabled(bUnitGroupPrivi);
     ui->WorkTicketManagerBox->setEnabled(bUnitGroupPrivi);
     ui->WorkTicketModelManagerBox->setEnabled(bUnitGroupPrivi);
-    ui->SystemLoginBox->setChecked((lGroupPrivilege & HPrivilege::SystemLoginPrivi) == HPrivilege::SystemLoginPrivi);
-    ui->SystemExitBox->setChecked((lGroupPrivilege & HPrivilege::SystemExitPrivi) == HPrivilege::SystemExitPrivi);
-    ui->PeopleManagerBox->setChecked((lGroupPrivilege & HPrivilege::PeopleManagerPrivi) == HPrivilege::PeopleManagerPrivi);
-    ui->ConfigureToolBox->setChecked((lGroupPrivilege & HPrivilege::ConfigureToolPrivi) == HPrivilege::ConfigureToolPrivi);
-    ui->GraphEditorBox->setChecked((lGroupPrivilege & HPrivilege::GraphEditorPrivi) == HPrivilege::GraphEditorPrivi);
-    ui->SystemSetBox->setChecked((lGroupPrivilege & HPrivilege::SystemSetPrivi) == HPrivilege::SystemSetPrivi);
-    ui->OperTicketBrowserBox->setChecked((lGroupPrivilege & HPrivilege::OperTicketBrowserPrivi) == HPrivilege::OperTicketBrowserPrivi);
-    ui->OperTicketEditorBox->setChecked((lGroupPrivilege & HPrivilege::OperTicketEditorPrivi) == HPrivilege::OperTicketEditorPrivi);
-    ui->OperTicketDeleteBox->setChecked((lGroupPrivilege & HPrivilege::OperTicketDeletePrivi) == HPrivilege::OperTicketDeletePrivi);
-    ui->OperTicketCancelBox->setChecked((lGroupPrivilege & HPrivilege::OperTicketCancelPrivi) == HPrivilege::OperTicketCancelPrivi);
-    ui->OperTicketRunBox->setChecked((lGroupPrivilege & HPrivilege::OperTicketRunPrivi) == HPrivilege::OperTicketRunPrivi);
-    ui->OperTicketGuardBox->setChecked((lGroupPrivilege & HPrivilege::OperTicketGuardPrivi) == HPrivilege::OperTicketGuardPrivi);
-    ui->ModelTicketToRunBox->setChecked((lGroupPrivilege & HPrivilege::ModelTicketToRunPrivi) == HPrivilege::ModelTicketToRunPrivi);
-    ui->TempTicketToRunBox->setChecked((lGroupPrivilege & HPrivilege::TempTicketToRunPrivi) == HPrivilege::TempTicketToRunPrivi);
-    ui->GiveOrderBox->setChecked((lGroupPrivilege & HPrivilege::GiveOrderPrivi) == HPrivilege::GiveOrderPrivi);
-    ui->DutyManagerBox->setChecked((lGroupPrivilege & HPrivilege::DutyManagerPrivi) == HPrivilege::DutyManagerPrivi);
-    ui->DutyLeaderBox->setChecked((lGroupPrivilege & HPrivilege::DutyLeaderPrivi) == HPrivilege::DutyLeaderPrivi);
-    ui->PrintSetBox->setChecked((lGroupPrivilege & HPrivilege::PrintSetPrivi) == HPrivilege::PrintSetPrivi);
-    ui->ManualSetBox->setChecked((lGroupPrivilege & HPrivilege::ManualSetPrivi) == HPrivilege::ManualSetPrivi);
-    ui->GroupOnOffBox->setChecked((lGroupPrivilege & HPrivilege::GroupOnOffPrivi) == HPrivilege::GroupOnOffPrivi);
-    ui->WorkTicketManagerBox->setChecked((lGroupPrivilege & HPrivilege::WorkTicketManagerPrivi) == HPrivilege::WorkTicketManagerPrivi);
-    ui->WorkTicketModelManagerBox->setChecked((lGroupPrivilege & HPrivilege::WorkTicketModelManagerPrivi) == HPrivilege::WorkTicketModelManagerPrivi);
+    ui->SystemLoginBox->setChecked((lGroupPrivilege & Ht::SystemLoginPrivi) == Ht::SystemLoginPrivi);
+    ui->SystemExitBox->setChecked((lGroupPrivilege & Ht::SystemExitPrivi) == Ht::SystemExitPrivi);
+    ui->PeopleManagerBox->setChecked((lGroupPrivilege & Ht::PeopleManagerPrivi) == Ht::PeopleManagerPrivi);
+    ui->ConfigureToolBox->setChecked((lGroupPrivilege & Ht::ConfigureToolPrivi) == Ht::ConfigureToolPrivi);
+    ui->GraphEditorBox->setChecked((lGroupPrivilege & Ht::GraphEditorPrivi) == Ht::GraphEditorPrivi);
+    ui->SystemSetBox->setChecked((lGroupPrivilege & Ht::SystemSetPrivi) == Ht::SystemSetPrivi);
+    ui->OperTicketBrowserBox->setChecked((lGroupPrivilege & Ht::OperTicketBrowserPrivi) == Ht::OperTicketBrowserPrivi);
+    ui->OperTicketEditorBox->setChecked((lGroupPrivilege & Ht::OperTicketEditorPrivi) == Ht::OperTicketEditorPrivi);
+    ui->OperTicketDeleteBox->setChecked((lGroupPrivilege & Ht::OperTicketDeletePrivi) == Ht::OperTicketDeletePrivi);
+    ui->OperTicketCancelBox->setChecked((lGroupPrivilege & Ht::OperTicketCancelPrivi) == Ht::OperTicketCancelPrivi);
+    ui->OperTicketRunBox->setChecked((lGroupPrivilege & Ht::OperTicketRunPrivi) == Ht::OperTicketRunPrivi);
+    ui->OperTicketGuardBox->setChecked((lGroupPrivilege & Ht::OperTicketGuardPrivi) == Ht::OperTicketGuardPrivi);
+    ui->ModelTicketToRunBox->setChecked((lGroupPrivilege & Ht::ModelTicketToRunPrivi) == Ht::ModelTicketToRunPrivi);
+    ui->TempTicketToRunBox->setChecked((lGroupPrivilege & Ht::TempTicketToRunPrivi) == Ht::TempTicketToRunPrivi);
+    ui->GiveOrderBox->setChecked((lGroupPrivilege & Ht::GiveOrderPrivi) == Ht::GiveOrderPrivi);
+    ui->DutyManagerBox->setChecked((lGroupPrivilege & Ht::DutyManagerPrivi) == Ht::DutyManagerPrivi);
+    ui->DutyLeaderBox->setChecked((lGroupPrivilege & Ht::DutyLeaderPrivi) == Ht::DutyLeaderPrivi);
+    ui->PrintSetBox->setChecked((lGroupPrivilege & Ht::PrintSetPrivi) == Ht::PrintSetPrivi);
+    ui->ManualSetBox->setChecked((lGroupPrivilege & Ht::ManualSetPrivi) == Ht::ManualSetPrivi);
+    ui->GroupOnOffBox->setChecked((lGroupPrivilege & Ht::GroupOnOffPrivi) == Ht::GroupOnOffPrivi);
+    ui->WorkTicketManagerBox->setChecked((lGroupPrivilege & Ht::WorkTicketManagerPrivi) == Ht::WorkTicketManagerPrivi);
+    ui->WorkTicketModelManagerBox->setChecked((lGroupPrivilege & Ht::WorkTicketModelManagerPrivi) == Ht::WorkTicketModelManagerPrivi);
 
 }
 
@@ -445,112 +446,112 @@ void HPrivilegeSet::on_modifyPwd()
 
 void HPrivilegeSet::on_SystemLoginBox()
 {
-    setPrivilege(HPrivilege::SystemLoginPrivi,m_Group,m_User);
+    setPrivilege(Ht::SystemLoginPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_SysetmExitBox()
 {
-    setPrivilege(HPrivilege::SystemExitPrivi,m_Group,m_User);
+    setPrivilege(Ht::SystemExitPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_PeopleManagerBox()
 {
-    setPrivilege(HPrivilege::PeopleManagerPrivi,m_Group,m_User);
+    setPrivilege(Ht::PeopleManagerPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_ConfigureToolBox()
 {
-    setPrivilege(HPrivilege::ConfigureToolPrivi,m_Group,m_User);
+    setPrivilege(Ht::ConfigureToolPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_GraphEditorBox()
 {
-    setPrivilege(HPrivilege::GraphEditorPrivi,m_Group,m_User);
+    setPrivilege(Ht::GraphEditorPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_SystemSetBox()
 {
-    setPrivilege(HPrivilege::SystemSetPrivi,m_Group,m_User);
+    setPrivilege(Ht::SystemSetPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_OperTicketBrowserBox()
 {
-    setPrivilege(HPrivilege::OperTicketBrowserPrivi,m_Group,m_User);
+    setPrivilege(Ht::OperTicketBrowserPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_OperTicketEditorBox()
 {
-    setPrivilege(HPrivilege::OperTicketEditorPrivi,m_Group,m_User);
+    setPrivilege(Ht::OperTicketEditorPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_OperTicketDeleteBox()
 {
-    setPrivilege(HPrivilege::OperTicketDeletePrivi,m_Group,m_User);
+    setPrivilege(Ht::OperTicketDeletePrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_OperTicketCancelBox()
 {
-    setPrivilege(HPrivilege::OperTicketCancelPrivi,m_Group,m_User);
+    setPrivilege(Ht::OperTicketCancelPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_OperTicketRunBox()
 {
-    setPrivilege(HPrivilege::OperTicketRunPrivi,m_Group,m_User);
+    setPrivilege(Ht::OperTicketRunPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_OperTicketGuardBox()
 {
-    setPrivilege(HPrivilege::OperTicketGuardPrivi,m_Group,m_User);
+    setPrivilege(Ht::OperTicketGuardPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_ModelTicketToRunBox()
 {
-    setPrivilege(HPrivilege::ModelTicketToRunPrivi,m_Group,m_User);
+    setPrivilege(Ht::ModelTicketToRunPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_TempTicketToRunBox()
 {
-    setPrivilege(HPrivilege::TempTicketToRunPrivi,m_Group,m_User);
+    setPrivilege(Ht::TempTicketToRunPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_GiveOrderBox()
 {
-    setPrivilege(HPrivilege::GiveOrderPrivi,m_Group,m_User);
+    setPrivilege(Ht::GiveOrderPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_DutyManagerBox()
 {
-    setPrivilege(HPrivilege::DutyManagerPrivi,m_Group,m_User);
+    setPrivilege(Ht::DutyManagerPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_DutyLeaderBox()
 {
-    setPrivilege(HPrivilege::DutyLeaderPrivi,m_Group,m_User);
+    setPrivilege(Ht::DutyLeaderPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_PrintSetBox()
 {
-    setPrivilege(HPrivilege::PrintSetPrivi,m_Group,m_User);
+    setPrivilege(Ht::PrintSetPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_ManualSetBox()
 {
-    setPrivilege(HPrivilege::ManualSetPrivi,m_Group,m_User);
+    setPrivilege(Ht::ManualSetPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_GroupOnOffBox()
 {
-    setPrivilege(HPrivilege::GroupOnOffPrivi,m_Group,m_User);
+    setPrivilege(Ht::GroupOnOffPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_WorkTicketManagerBox()
 {
-    setPrivilege(HPrivilege::WorkTicketManagerPrivi,m_Group,m_User);
+    setPrivilege(Ht::WorkTicketManagerPrivi,m_Group,m_User);
 }
 
 void HPrivilegeSet::on_WorkTicketModelManagerBox()
 {
-    setPrivilege(HPrivilege::WorkTicketModelManagerPrivi,m_Group,m_User);
+    setPrivilege(Ht::WorkTicketModelManagerPrivi,m_Group,m_User);
 }
 
 
@@ -568,7 +569,7 @@ void HPrivilegeSet::setGroupPrivilege(quint64 lPrivilege,Group* group)
     //已经存在这个权限就是去掉
     if((group->lGroupPrivilege & lPrivilege) == lPrivilege)
     {
-        if(lPrivilege == HPrivilege::PeopleManagerPrivi && (group->wGroupID = ADMINGROUPID))
+        if(lPrivilege == Ht::PeopleManagerPrivi && (group->wGroupID = ADMINGROUPID))
         {
             ui->PeopleManagerBox->setChecked(true);
             QMessageBox::warning(NULL,"警告","系统管理员必须有人员维护权限!",QMessageBox::Ok);
@@ -597,7 +598,7 @@ void HPrivilegeSet::setUserPrivilege(quint64 lPrivilege,User* user)
     //已经存在这个权限就是去掉
     if((user->lGroupPrivilege & lPrivilege) == lPrivilege)
     {
-        if(lPrivilege == HPrivilege::PeopleManagerPrivi && (user->wGroupID = ADMINUSERID))
+        if(lPrivilege == Ht::PeopleManagerPrivi && (user->wGroupID = ADMINUSERID))
         {
             QMessageBox::warning(NULL,"警告","系统管理员必须有人员维护权限!",QMessageBox::Ok);
             ui->PeopleManagerBox->setChecked(true);

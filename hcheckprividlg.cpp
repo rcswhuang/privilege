@@ -12,6 +12,7 @@ HCheckPriviDlg::HCheckPriviDlg(QWidget *parent) :
     ui(new Ui::HCheckPriviDlg)
 {
     ui->setupUi(this);
+    setWindowFlags(windowFlags()&~Qt::WindowContextHelpButtonHint);
     //initCheckPrivi();
 }
 

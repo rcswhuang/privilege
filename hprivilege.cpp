@@ -9,7 +9,7 @@ HPrivilege::HPrivilege()
     initSysConfig();
     char szPriFile[256];
     getDataFilePath(DFPATH_DATA,szPriFile);
-    m_strPriFile = QString(szPriFile) + "/" + "privilege.dat";
+    m_strPriFile = QString(szPriFile) + "privilege.dat";
     loadData();
 }
 
@@ -24,15 +24,35 @@ HPrivilege::~HPrivilege()
     m_pGroupList.clear();
 }
 
+bool HPrivilege::makePrivilegeFile()
+{
+    if(QFile::exists(m_strPriFile))
+            return true;
+    QFile file(m_strPriFile);
+    if(!file.open(QIODevice::WriteOnly))
+        return false;
+    QDataStream stream(&file);
+    quint64 magic = 0xA0B00C0D;
+    stream<<(quint64)magic;
+    stream<<(quint16)0;
+    file.close();
+    return true;
+}
+
 bool HPrivilege::loadData()
 {
-    /*if(m_strPriFile.isEmpty())
-        return false;
+    //注：此处如果文件不存在，将无法继续
+    if(!QFile::exists(m_strPriFile))
+    {
+        if(!makePrivilegeFile())
+            return false;
+    }
     QFile file(m_strPriFile);
     if(!file.open(QIODevice::ReadOnly))
     {
         return false;
     }
+
     QDataStream stream(&file);
     quint64 magic;
     stream>>magic;
@@ -80,8 +100,8 @@ bool HPrivilege::loadData()
         stream>>n16;
         user->wGroupID = n16;
         m_pUserList.append(user);
-    }*/
-
+    }
+    file.close();
     //初始化管理员组号
     Group* group = addGroup("系统管理组");
     if(group)
@@ -90,7 +110,9 @@ bool HPrivilege::loadData()
 
         User* user = addUser(group->wGroupID,"系统管理员","");
         if(user)
+        {
             user->wUserID = ADMINUSERID;//特殊用户号
+        }
     }
     return true;
 }
@@ -131,6 +153,7 @@ bool HPrivilege::saveData()
         stream<<(QString)user->strUserPwd;
         stream<<(quint16)user->wGroupID;
     }
+    file.close();
     return true;
 }
 
@@ -149,9 +172,9 @@ Group* HPrivilege::addGroup(const QString& strGroupName)
     group->strGroupName = strGroupName;
     group->wGroupID = wGroupID;
     group->bUnitePrivilege = true;
-    group->lGroupPrivilege = HPrivilege::defaulPrivi;
+    group->lGroupPrivilege = Ht::defaulPrivi;
     if(!strGroupName.compare(ADMINGROUP))
-        group->lGroupPrivilege = HPrivilege::AllPrivi;
+        group->lGroupPrivilege = Ht::AllPrivi;
     m_pGroupList.append(group);
     return group;
 }
@@ -281,8 +304,7 @@ bool HPrivilege::setPrivilege()
 {
     QString strUserName;
     QString strTitle = QStringLiteral("权限管理");
-    //bool bOk = checkPrivilege(HPrivilege::PeopleManagerPrivi,strUserName,strTitle);
-    if(!checkPrivilege(HPrivilege::PeopleManagerPrivi,strUserName,strTitle))
+    if(!checkPrivilege(Ht::PeopleManagerPrivi,strUserName,strTitle))
         return false;
     HPrivilegeSet dlg;
     dlg.exec();
