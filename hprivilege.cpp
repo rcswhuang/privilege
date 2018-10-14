@@ -172,9 +172,9 @@ Group* HPrivilege::addGroup(const QString& strGroupName)
     group->strGroupName = strGroupName;
     group->wGroupID = wGroupID;
     group->bUnitePrivilege = true;
-    group->lGroupPrivilege = Ht::defaulPrivi;
+    group->lGroupPrivilege = HPrivis::defaulPrivi;
     if(!strGroupName.compare(ADMINGROUP))
-        group->lGroupPrivilege = Ht::AllPrivi;
+        group->lGroupPrivilege = HPrivis::AllPrivi;
     m_pGroupList.append(group);
     return group;
 }
@@ -304,7 +304,7 @@ bool HPrivilege::setPrivilege()
 {
     QString strUserName;
     QString strTitle = QStringLiteral("权限管理");
-    if(!checkPrivilege(Ht::PeopleManagerPrivi,strUserName,strTitle))
+    if(!checkPrivilege(HPrivis::PeopleManagerPrivi,strUserName,strTitle))
         return false;
     HPrivilegeSet dlg;
     dlg.exec();
